@@ -7,6 +7,7 @@ import { UserCategoriesComponent } from './user/user-categories/user-categories.
 import { UserBaseComponent } from './user/user-base/user-base.component';
 import { HomeComponent } from './admin/home/home.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
+import { EditProductsComponent } from './admin/edit-products/edit-products.component';
 
 export const routes: Routes = [
 
@@ -36,6 +37,9 @@ export const routes: Routes = [
             {
                 path: 'add-product',
                 component: AddProductComponent
+            },
+            {
+                path: 'edit-product/:id', component: EditProductsComponent
             }
         ]
     },
