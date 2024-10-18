@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product/product.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Category } from '../../enum/category.enum';
 
 @Component({
   selector: 'app-edit-products',
@@ -13,6 +14,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './edit-products.component.css'
 })
 export class EditProductsComponent implements OnInit {
+  categories = Object.values(Category);
   product: Product | undefined;
   id!: number;
 

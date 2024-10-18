@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../models/product.model';
+import { Category } from '../../enum/category.enum';
 
 @Component({
   selector: 'app-add-product',
@@ -12,29 +13,30 @@ import { Product } from '../../models/product.model';
   styleUrl: './add-product.component.css'
 })
 export class AddProductComponent {
+  categories = Object.values(Category); 
+  selectedCategory: Category = Category.Grocery;  // Default selected value
 
-  id = 4;  // Keep track of the product IDs manually for now
+  id = 0;
   name = '';
   price = 0;
   description = '';
-  category = '';
 
   constructor(private productService: ProductService) {}
 
   addProduct() {
-    const product: Product = {
+    const product = {
       id: this.id,
       name: this.name,
       price: this.price,
       description: this.description,
-      category: this.category
+      category: this.selectedCategory  
     };
 
-    this.productService.addProduct(product);  // Add the product via the service
-    this.id += 1; 
+    this.productService.addProduct(product);
+    this.id += 1;
     this.name = '';
     this.price = 0;
     this.description = '';
-    this.category = '';
+    this.selectedCategory = Category.Grocery; 
   }
 }

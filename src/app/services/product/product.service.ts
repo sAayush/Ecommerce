@@ -1,32 +1,35 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../../models/product.model';
+import { Category } from '../../enum/category.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  cat = Category;
+
   private products: Product[] = [
     {
       id: 1,
       name: 'Product 1',
       price: 100,
       description: 'Product 1 description',
-      category: 'Category 1'
+      category: this.cat.Beauty
     },
     {
       id: 2,
       name: 'Product 2',
       price: 200,
       description: 'Product 2 description',
-      category: 'Category 2'
+      category: this.cat.Beauty
     },
     {
       id: 3,
       name: 'Product 3',
       price: 300,
       description: 'Product 3 description',
-      category: 'Category 3'
+      category: this.cat.Beauty
     }
   ];
 
