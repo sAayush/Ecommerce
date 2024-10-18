@@ -1,48 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { Product } from '../product/product.model';
+import { Component, OnInit } from '@angular/core';
+import { Product } from '../../models/product.model';
+import { RouterLink } from '@angular/router';
+import { ProductService } from '../../services/product/product.service';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
-export class ProductsComponent {
-  products: Product[] = [
-    {
-      id: 1,
-      name: 'Product 1',
-      price: 100,
-      description: 'Product 1 description',
-      category: 'Category 1'
-    },
-    {
-      id: 2,
-      name: 'Product 1',
-      price: 100,
-      description: 'Product 1 description',
-      category: 'Category 1'
-    },
-    {
-      id: 3,
-      name: 'Product 1',
-      price: 100,
-      description: 'Product 1 description',
-      category: 'Category 1'
-    }
-  ]
+export class ProductsComponent implements OnInit {
+  products: Product[] = [];
 
-  addProduct(product: Product) {
-    this.products.push(product)
+  constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.productService.getProducts().subscribe(products => {
+      this.products = products;
+    });
   }
 
-  removeProduct(product: Product) {
-    this.products = this.products.filter(p => p !== product)
+  removeProduct(productId: number) {
+    this.productService.removeProduct(productId);
   }
+
   editProduct(product: Product) {
-    const index = this.products.findIndex(p => p === product)
-    this.products[index] = product
+    this.productService.editProduct(product);
   }
 }
