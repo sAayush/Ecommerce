@@ -8,6 +8,7 @@ import { UserBaseComponent } from './user/user-base/user-base.component';
 import { HomeComponent } from './admin/home/home.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { EditProductsComponent } from './admin/edit-products/edit-products.component';
+import { UserCartComponent } from './user/user-cart/user-cart.component';
 
 export const routes: Routes = [
 
@@ -51,6 +52,10 @@ export const routes: Routes = [
                 path: 'category',
                 component: UserCategoriesComponent
 
+            },
+            {
+                path: 'usercart',
+                component: UserCartComponent
             }
         ]
     }
