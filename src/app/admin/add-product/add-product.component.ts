@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../services/product/product.service';
-import { Product } from '../../models/product.model';
 import { Category } from '../../enum/category.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -16,12 +16,15 @@ export class AddProductComponent {
   categories = Object.values(Category); 
   selectedCategory: Category = Category.Grocery;  // Default selected value
 
-  id = 0;
+  id = 4;
   name = '';
   price = 0;
   description = '';
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router
+  ) {}
 
   addProduct() {
     const product = {
@@ -31,12 +34,12 @@ export class AddProductComponent {
       description: this.description,
       category: this.selectedCategory  
     };
-
-    this.productService.addProduct(product);
     this.id += 1;
     this.name = '';
     this.price = 0;
     this.description = '';
     this.selectedCategory = Category.Grocery; 
+    this.productService.addProduct(product);
+    this.router.navigate(['/admin/products']);
   }
 }

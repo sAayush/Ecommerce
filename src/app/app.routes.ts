@@ -25,10 +25,6 @@ export const routes: Routes = [
         component: BaseComponent,
         children: [
             {
-                path: 'home',
-                component: HomeComponent
-            },
-            {
                 path: 'products',
                 component: ProductsComponent,
                 children: []
@@ -48,7 +44,7 @@ export const routes: Routes = [
         component: UserBaseComponent,
         children: [
             {
-                path: 'products',
+                path: 'userproducts',
                 component: UserProductsComponent
             },
             {

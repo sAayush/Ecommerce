@@ -7,34 +7,52 @@ import { Category } from '../../enum/category.enum';
   providedIn: 'root'
 })
 export class ProductService {
+  private localStorageKey = 'productsData'; // Key to use for localStorage
+  
   cat = Category;
 
-  private products: Product[] = [
+  // Load products from localStorage if available, else use default products
+  private products: Product[] = this.loadProductsFromLocalStorage() || [
     {
       id: 1,
-      name: 'Product 1',
-      price: 100,
-      description: 'Product 1 description',
-      category: this.cat.Beauty
+      name: 'Wireless Headphones',
+      price: 120.00,
+      description: 'High-quality wireless headphones with noise cancellation.',
+      category: Category.Tech
     },
     {
       id: 2,
-      name: 'Product 2',
-      price: 200,
-      description: 'Product 2 description',
-      category: this.cat.Beauty
+      name: 'Organic Bananas',
+      price: 1.50,
+      description: 'Fresh organic bananas sourced from sustainable farms.',
+      category: Category.Grocery
     },
     {
       id: 3,
-      name: 'Product 3',
-      price: 300,
-      description: 'Product 3 description',
-      category: this.cat.Beauty
+      name: 'Gaming Laptop',
+      price: 1500.00,
+      description: 'High-performance gaming laptop with top-tier specs.',
+      category: Category.Tech
     }
   ];
 
   private productsSubject = new BehaviorSubject<Product[]>(this.products);
   products$ = this.productsSubject.asObservable();
+  
+  constructor() {
+    this.saveProductsToLocalStorage(); // Save initial products to localStorage
+  }
+
+  // Load products from localStorage
+  private loadProductsFromLocalStorage(): Product[] | null {
+    const storedProducts = localStorage.getItem(this.localStorageKey);
+    return storedProducts ? JSON.parse(storedProducts) : null;
+  }
+
+  // Save products to localStorage
+  private saveProductsToLocalStorage(): void {
+    localStorage.setItem(this.localStorageKey, JSON.stringify(this.products));
+  }
 
   getProducts(): Observable<Product[]> {
     return this.products$;
@@ -43,11 +61,13 @@ export class ProductService {
   addProduct(product: Product): void {
     this.products.push(product);
     this.productsSubject.next(this.products); // Update the products observable
+    this.saveProductsToLocalStorage(); // Save changes to localStorage
   }
 
   removeProduct(productId: number): void {
     this.products = this.products.filter(p => p.id !== productId);
     this.productsSubject.next(this.products); // Update the products observable
+    this.saveProductsToLocalStorage(); // Save changes to localStorage
   }
 
   editProduct(updatedProduct: Product): void {
@@ -55,6 +75,7 @@ export class ProductService {
     if (index !== -1) {
       this.products[index] = updatedProduct;
       this.productsSubject.next(this.products); // Update the products observable
+      this.saveProductsToLocalStorage(); // Save changes to localStorage
     }
   }
 }
