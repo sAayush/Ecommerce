@@ -21,7 +21,7 @@ export class LoginComponent {
       this.router.navigate(['/admin']);
     }
     else if (this.user.username === 'user' && this.user.password === 'user') {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/user']);
     }
     else {
       alert('Login failed');

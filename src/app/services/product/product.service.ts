@@ -7,11 +7,10 @@ import { Category } from '../../enum/category.enum';
   providedIn: 'root'
 })
 export class ProductService {
-  private localStorageKey = 'productsData'; // Key to use for localStorage
+  private localStorageKey = 'productsData'; 
   
   cat = Category;
 
-  // Load products from localStorage if available, else use default products
   private products: Product[] = this.loadProductsFromLocalStorage() || [
     {
       id: 1,
@@ -40,16 +39,14 @@ export class ProductService {
   products$ = this.productsSubject.asObservable();
   
   constructor() {
-    this.saveProductsToLocalStorage(); // Save initial products to localStorage
+    this.saveProductsToLocalStorage(); 
   }
 
-  // Load products from localStorage
   private loadProductsFromLocalStorage(): Product[] | null {
     const storedProducts = localStorage.getItem(this.localStorageKey);
     return storedProducts ? JSON.parse(storedProducts) : null;
   }
 
-  // Save products to localStorage
   private saveProductsToLocalStorage(): void {
     localStorage.setItem(this.localStorageKey, JSON.stringify(this.products));
   }
@@ -58,24 +55,52 @@ export class ProductService {
     return this.products$;
   }
 
+  // Validation function to ensure the product meets the criteria
+  validateProduct(product: Product): string | null {
+    if (product.name.length > 50) {
+      return 'Product name cannot exceed 50 characters.';
+    }
+
+    const wordCount = product.description.trim().split(/\s+/).length;
+    if (wordCount < 10) {
+      return 'Product description must contain at least 10 words.';
+    }
+
+    if (product.price < 0) {
+      return 'Product price cannot be negative.';
+    }
+
+    return null; // No validation errors
+  }
+
   addProduct(product: Product): void {
+    const validationError = this.validateProduct(product);
+    if (validationError) {
+      throw new Error(validationError); // Throw error if validation fails
+    }
+
     this.products.push(product);
-    this.productsSubject.next(this.products); // Update the products observable
-    this.saveProductsToLocalStorage(); // Save changes to localStorage
+    this.productsSubject.next(this.products);
+    this.saveProductsToLocalStorage();
   }
 
   removeProduct(productId: number): void {
     this.products = this.products.filter(p => p.id !== productId);
-    this.productsSubject.next(this.products); // Update the products observable
-    this.saveProductsToLocalStorage(); // Save changes to localStorage
+    this.productsSubject.next(this.products);
+    this.saveProductsToLocalStorage();
   }
 
   editProduct(updatedProduct: Product): void {
+    const validationError = this.validateProduct(updatedProduct);
+    if (validationError) {
+      throw new Error(validationError); // Throw error if validation fails
+    }
+
     const index = this.products.findIndex(p => p.id === updatedProduct.id);
     if (index !== -1) {
       this.products[index] = updatedProduct;
-      this.productsSubject.next(this.products); // Update the products observable
-      this.saveProductsToLocalStorage(); // Save changes to localStorage
+      this.productsSubject.next(this.products);
+      this.saveProductsToLocalStorage();
     }
   }
 }
