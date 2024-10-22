@@ -20,7 +20,7 @@
           <!-- Category and Price Row -->
           <div class="flex justify-between items-center mt-4">
             <span class="text-sm text-gray-500 italic">{{ product.category }}</span>
-            <span class="text-xl font-bold text-gray-800">{{ product.price | currency: 'INR' }}</span>
+            <span class="text-xl font-bold text-gray-800">{{ product.price | currency: 'INR' }} - {{ product.quantity }}</span>
           </div>
   
           <!-- Add to Cart Button -->

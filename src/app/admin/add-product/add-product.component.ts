@@ -26,6 +26,8 @@ export class AddProductComponent implements OnInit {
   name = '';
   price = 0;
   description = '';
+  quantity = 0;
+  incart = 0;
 
   constructor(
     private productService: ProductService,
@@ -39,7 +41,9 @@ export class AddProductComponent implements OnInit {
       name: this.name,
       price: this.price,
       description: this.description,
-      category: this.selectedCategory  
+      category: this.selectedCategory,
+      quantity: this.quantity,
+      incart: this.incart
     };
     
     this.name = '';

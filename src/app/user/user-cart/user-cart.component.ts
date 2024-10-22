@@ -11,32 +11,26 @@ import { CommonModule } from '@angular/common';
   styleUrl: './user-cart.component.css'
 })
 export class UserCartComponent implements OnInit {
-  total: number = 0;
   cartItems: Product[] = [];
 
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    // Subscribe to cart items from the cart service
     this.cartService.getCartItems().subscribe(items => {
       this.cartItems = items;
     });
   }
 
-  // Remove an item from the cart
+  // Remove an item from the cart (or decrease quantity)
   removeItem(productId: number): void {
     this.cartService.removeFromCart(productId);
   }
 
-  // Clear all items in the cart
   clearCart(): void {
     this.cartService.clearCart();
   }
-  
+
   getTotal(): number {
-    for (let i = 0; i < this.cartItems.length; i++) {
-      this.total += this.cartItems[i].price;
-    }
-    return this.total;
+    return this.cartItems.reduce((total, item) => total + item.price * item.incart, 0);
   }
 }

@@ -16,22 +16,28 @@ export class ProductService {
       id: 1,
       name: 'Wireless Headphones',
       price: 120.00,
+      quantity: 10,
       description: 'High-quality wireless headphones with noise cancellation.',
-      category: Category.Tech
+      category: Category.Tech,
+      incart: 0
     },
     {
       id: 2,
       name: 'Organic Bananas',
       price: 1.50,
+      quantity: 10,
       description: 'Fresh organic bananas sourced from sustainable farms.',
-      category: Category.Grocery
+      category: Category.Grocery,
+      incart: 0
     },
     {
       id: 3,
       name: 'Gaming Laptop',
       price: 1500.00,
+      quantity: 10,
       description: 'High-performance gaming laptop with top-tier specs.',
-      category: Category.Tech
+      category: Category.Tech,
+      incart: 0
     }
   ];
 
@@ -68,6 +74,10 @@ export class ProductService {
 
     if (product.price < 0) {
       return 'Product price cannot be negative.';
+    }
+
+    if (product.quantity < 0) {
+      return 'Product quantity cannot be negative.';
     }
 
     return null; // No validation errors
