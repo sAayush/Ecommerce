@@ -4,11 +4,10 @@ import { CartService } from '../../services/cart/cart.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-user-cart',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './user-cart.component.html',
-  styleUrl: './user-cart.component.css'
+    selector: 'app-user-cart',
+    imports: [CommonModule],
+    templateUrl: './user-cart.component.html',
+    styleUrl: './user-cart.component.css'
 })
 export class UserCartComponent implements OnInit {
   cartItems: Product[] = [];

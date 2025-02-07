@@ -5,11 +5,10 @@ import { RouterLink } from '@angular/router';
 import { ProductService } from '../../services/product/product.service';
 
 @Component({
-  selector: 'app-products',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+    selector: 'app-products',
+    imports: [CommonModule, RouterLink],
+    templateUrl: './products.component.html',
+    styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];

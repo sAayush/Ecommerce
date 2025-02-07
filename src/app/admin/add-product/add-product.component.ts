@@ -7,11 +7,10 @@ import { Router } from '@angular/router';
 import { Product } from '../../models/product.model';
 
 @Component({
-  selector: 'app-add-product',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './add-product.component.html',
-  styleUrl: './add-product.component.css'
+    selector: 'app-add-product',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './add-product.component.html',
+    styleUrl: './add-product.component.css'
 })
 export class AddProductComponent implements OnInit {
   products :Product[] = [];

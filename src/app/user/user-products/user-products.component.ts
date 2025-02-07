@@ -5,11 +5,10 @@ import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart/cart.service';
 
 @Component({
-  selector: 'app-user-products',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './user-products.component.html',
-  styleUrl: './user-products.component.css'
+    selector: 'app-user-products',
+    imports: [CommonModule],
+    templateUrl: './user-products.component.html',
+    styleUrl: './user-products.component.css'
 })
 export class UserProductsComponent implements OnInit {
   products: Product[] = [];

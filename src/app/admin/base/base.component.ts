@@ -5,11 +5,10 @@ import { HomeComponent } from '../home/home.component';
 
 
 @Component({
-  selector: 'app-base',
-  standalone: true,
-  imports: [RouterOutlet, CommonModule, RouterLink, RouterLinkActive, HomeComponent],
-  templateUrl: './base.component.html',
-  styleUrl: './base.component.css'
+    selector: 'app-base',
+    imports: [RouterOutlet, CommonModule, RouterLink, RouterLinkActive, HomeComponent],
+    templateUrl: './base.component.html',
+    styleUrl: './base.component.css'
 })
 export class BaseComponent {
   constructor(private router: Router) { }

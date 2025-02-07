@@ -4,11 +4,10 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/rou
 import { UserhomeComponent } from '../userhome/userhome.component';
 
 @Component({
-  selector: 'app-user-base',
-  standalone: true,
-  imports: [RouterOutlet, CommonModule, UserhomeComponent, RouterLink, RouterLinkActive],
-  templateUrl: './user-base.component.html',
-  styleUrl: './user-base.component.css'
+    selector: 'app-user-base',
+    imports: [RouterOutlet, CommonModule, UserhomeComponent, RouterLink, RouterLinkActive],
+    templateUrl: './user-base.component.html',
+    styleUrl: './user-base.component.css'
 })
 export class UserBaseComponent {
 

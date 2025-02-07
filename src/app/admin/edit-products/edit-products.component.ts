@@ -7,11 +7,10 @@ import { CommonModule } from '@angular/common';
 import { Category } from '../../enum/category.enum';
 
 @Component({
-  selector: 'app-edit-products',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
-  templateUrl: './edit-products.component.html',
-  styleUrl: './edit-products.component.css'
+    selector: 'app-edit-products',
+    imports: [FormsModule, CommonModule],
+    templateUrl: './edit-products.component.html',
+    styleUrl: './edit-products.component.css'
 })
 export class EditProductsComponent implements OnInit {
   categories = Object.values(Category);
